@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>json</h1>
+    <div id="json"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("http://localhost:3000/test")
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (myJson) {
+            let stringBody = `export default ko = {${"\n"}  ko: {${"\n"}    translation: {${"\n"}`;
+            let displayBody =
+              "<div>export default ko = {</div>\
+              <div>&nbsp;&nbsp;ko: {</div>\
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;translation: {</div>";
+            console.log(JSON.stringify(myJson));
+            myJson.forEach((val) => {
+              console.log(val);
+              displayBody += `<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${val.transkey}: "${val.ko}",</div>`;
+              stringBody += `     ${val.transkey}: "${val.ko}",${"\n"}`;
+            });
+            stringBody += `    }${"\n"}  }${"\n"}}`;
+            displayBody +=
+              "<div>&nbsp;&nbsp;&nbsp;}</div>\
+              <div>&nbsp;&nbsp;}</div>\
+              <div>}</div>";
+            document.getElementById("json").innerHTML = displayBody;
+            console.log(stringBody);
+          });
+      });
+    </script>
+  </body>
+</html>
