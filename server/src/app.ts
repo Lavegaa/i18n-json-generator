@@ -5,8 +5,8 @@ import routes from './routes/routes'
 const server: FastifyInstance<Server, IncomingMessage, ServerResponse> =
   fastify()
 
-server.register(dbConnection)
-server.register(routes)
+// server.register(dbConnection)
+// server.register(routes)
 server.register(require('fastify-cors'), {
   // put your options here
 })
